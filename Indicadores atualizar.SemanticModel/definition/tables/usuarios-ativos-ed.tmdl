@@ -1,0 +1,91 @@
+table usuarios-ativos-ed
+	lineageTag: 5ce88cab-56c5-40cf-b506-27db89232438
+
+	measure TotalAtivos = COUNTROWS('usuarios-ativos-ed')
+		formatString: 0
+		lineageTag: a194634d-bfac-4c76-9a0a-f1054a2da5aa
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 48c54239-8213-44c7-ae3a-f5c5b65b5b64
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome
+		dataType: string
+		lineageTag: c6d9d584-f7c6-443e-b620-8d5899ba78d4
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: b93e9091-1cd4-4e0c-9a10-52c3376056c2
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado
+		dataType: string
+		lineageTag: 133a114b-fe54-4a08-8fb8-7ecc644f0f7b
+		summarizeBy: none
+		sourceColumn: Estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Última Atividade'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b2a700aa-6fe4-4317-9996-b2b793b60d6e
+		summarizeBy: none
+		sourceColumn: Última Atividade
+
+		variation Variation
+			isDefault
+			relationship: dd55e920-056e-449e-a192-d2681aeb46b6
+			defaultHierarchy: LocalDateTable_ff355b03-8849-46f1-bd22-f316ffdc735f.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Papel
+		dataType: string
+		lineageTag: c31768b4-1760-435b-97d4-e1b48ef3f57d
+		summarizeBy: none
+		sourceColumn: Papel
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data de Cadastro'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2a625afa-2684-4a17-a00e-b7c68ef2c787
+		summarizeBy: none
+		sourceColumn: Data de Cadastro
+
+		variation Variation
+			isDefault
+			relationship: 046ff24e-8962-4a68-a34c-326c6d06508e
+			defaultHierarchy: LocalDateTable_ee11c0dd-65c4-42d7-8e82-da7d76a51e7a.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition usuarios-ativos-ed = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Espa%C3%A7o%20Docente/usuarios-ativos-ed-2026.xlsx"), null, true),
+				    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"ID", Int64.Type}, {"Nome", type text}, {"Email", type text}, {"Estado", type text}, {"Última Atividade", type datetime}, {"Papel", type text}, {"Data de Cadastro", type datetime}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

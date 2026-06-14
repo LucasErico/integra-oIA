@@ -1,0 +1,135 @@
+table 'Edital Inova 2023'
+	lineageTag: 4a0ef60a-8242-4008-bcc4-c36607b47286
+
+	measure 'Cobertura de Estados' = ```
+			
+			VAR EstadosInova2023 = 
+			    DISTINCT('Edital Inova 2023'[Estado sem acento])
+			
+			VAR EstadosInova2024 = 
+			    DISTINCT('Edital Inova 2024'[Estado sem acento])
+			
+			VAR EstadosMelhores2024 = 
+			    DISTINCT('Edital Melhores Práticas 2024'[Estado sem acento])
+			
+			VAR EstadosMelhores2025 = 
+			    DISTINCT('Edital Melhores Práticas 2025'[Estado sem acento])
+			
+			VAR TodosEstados = 
+			    UNION(
+			        EstadosInova2023,
+			        EstadosInova2024,
+			        EstadosMelhores2024,
+			        EstadosMelhores2025
+			    )
+			
+			RETURN
+			    COUNTROWS(
+			        DISTINCT(TodosEstados)
+			    )
+			```
+		formatString: 0
+		lineageTag: b433753b-5ce1-4a07-8b87-52fc9ba74fac
+
+	measure 'Total de Projetos Inova' =
+			
+			COUNTROWS('Edital Inova 2023') +
+			COUNTROWS('Edital Inova 2024')
+		formatString: 0
+		lineageTag: 84995292-4906-41ee-8a5f-da334f968a6d
+
+	measure 'Projetos Inova 2023' = ```
+			
+			VAR Resultado = 
+			    CALCULATE(
+			        COUNTROWS('Todos os Projetos'),
+			        'Todos os Projetos'[Edital] = "Inova 2023"
+			    )
+			RETURN
+			    IF(ISBLANK(Resultado), 0, Resultado)
+			```
+		formatString: 0
+		lineageTag: fbc210d3-3ffc-4a23-8fc9-0bcfd50b215a
+
+	column 'Departamento Regional'
+		dataType: string
+		lineageTag: 33cd964b-4fd1-48c0-bc5d-5afb3ae34c50
+		summarizeBy: none
+		sourceColumn: Departamento Regional
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado com acento'
+		dataType: string
+		lineageTag: 88da47cd-1fa4-4487-878c-f7fb5b50a7ee
+		summarizeBy: none
+		sourceColumn: Estado com acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		dataType: string
+		lineageTag: 39cd3ba2-657b-4423-88e6-d0b92c5cca8b
+		summarizeBy: none
+		sourceColumn: Núcleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Responsável pelo projeto'
+		dataType: string
+		lineageTag: e25e5327-9aa5-411b-bb77-8f7c09b3a820
+		summarizeBy: none
+		sourceColumn: Responsável pelo projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email do responsável pelo projeto'
+		dataType: string
+		lineageTag: 808e0165-1d8f-4b06-a6a8-04eeb75f9a75
+		summarizeBy: none
+		sourceColumn: Email do responsável pelo projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do projeto'
+		dataType: string
+		lineageTag: 1617bb94-c6e4-4d96-9585-f5b994d28984
+		summarizeBy: none
+		sourceColumn: Nome do projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Breve descrição do projeto'
+		dataType: string
+		lineageTag: 1e459d61-e254-47d5-8f92-0757c2a95266
+		summarizeBy: none
+		sourceColumn: Breve descrição do projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado sem acento'
+		dataType: string
+		lineageTag: 5b82e200-cf1a-4943-8fce-c420af6712a2
+		summarizeBy: none
+		sourceColumn: Estado sem acento
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Edital Inova 2023' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Editais/EditalInova2023.xlsx"), null, true),
+				    #"Edital Inova 2023_Sheet" = Fonte{[Item="Edital Inova 2023",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Edital Inova 2023_Sheet",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Departamento Regional", type text}, {"Estado com acento", type text}, {"Núcleo", type text}, {"Responsável pelo projeto", type text}, {"Email do responsável pelo projeto", type text}, {"Nome do projeto", type text}, {"Breve descrição do projeto", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado1","RR","RR",Replacer.ReplaceText,{"Departamento Regional"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Norte/Centro Oeste","Norte/Centro-oeste",Replacer.ReplaceText,{"Núcleo"})
+				in
+				    #"Valor Substituído1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

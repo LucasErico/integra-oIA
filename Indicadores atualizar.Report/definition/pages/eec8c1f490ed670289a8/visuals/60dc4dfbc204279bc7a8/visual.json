@@ -1,0 +1,185 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "60dc4dfbc204279bc7a8",
+  "position": {
+    "x": 937.10482529118133,
+    "y": 257.70382695507487,
+    "z": 19000,
+    "height": 454.70881863560732,
+    "width": 314.14309484193012,
+    "tabOrder": 19000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LabSaude"
+                    }
+                  },
+                  "Property": "uf"
+                }
+              },
+              "queryRef": "LabSaude.uf",
+              "nativeQueryRef": "uf"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LabSaude"
+                    }
+                  },
+                  "Property": "unidade"
+                }
+              },
+              "queryRef": "LabSaude.unidade",
+              "nativeQueryRef": "unidade"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LabSaude"
+                        }
+                      },
+                      "Property": "dados_mtr_tecenf_2024"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "LabSaude.dados_mtr_tecenf_2024",
+              "nativeQueryRef": "Soma de dados_mtr_tecenf_2024",
+              "displayName": "2024"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "LabSaude"
+                        }
+                      },
+                      "Property": "dados_mtr_tecenf_2025"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "LabSaude.dados_mtr_tecenf_2025",
+              "nativeQueryRef": "Soma de dados_mtr_tecenf_2025",
+              "displayName": "2025"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "LabSaude"
+                      }
+                    },
+                    "Property": "dados_mtr_tecenf_2024"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "62.095169802074295D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LabSaude.unidade"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "73.69370705208452D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LabSaude.dados_mtr_tecenf_2024"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "126.1943706360332D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LabSaude.dados_mtr_tecenf_2025"
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

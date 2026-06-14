@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Indicadores atualizar"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7daadce8-8507-47ed-be2b-4195eaf88b6d"
+  }
+}

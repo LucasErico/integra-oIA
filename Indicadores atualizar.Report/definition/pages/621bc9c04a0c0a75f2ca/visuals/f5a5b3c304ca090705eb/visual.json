@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "f5a5b3c304ca090705eb",
+  "position": {
+    "x": 658.48024316109422,
+    "y": 241.21580547112464,
+    "z": 2000,
+    "height": 176.048632218845,
+    "width": 563.161094224924,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Saúde"
+                    }
+                  },
+                  "Property": "Column4"
+                }
+              },
+              "queryRef": "Saúde.Column4",
+              "nativeQueryRef": "Departamento Regional",
+              "displayName": "Departamento Regional"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Saúde"
+                    }
+                  },
+                  "Property": "Column1"
+                }
+              },
+              "queryRef": "Saúde.Column1",
+              "nativeQueryRef": "Contato",
+              "displayName": "Contato"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Saúde"
+                  }
+                },
+                "Property": "Column4"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "354.1154939278165D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Saúde.Column1"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "188.44073938183095D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Saúde.Column4"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,103 @@
+table 'Edital Melhores Práticas 2024'
+	lineageTag: 9e917aca-d1c6-4797-a40c-e4c3815ba79e
+
+	measure 'Total de Projetos Melhores Práticas' =
+			
+			COUNTROWS('Edital Melhores Práticas 2024') +
+			COUNTROWS('Edital Melhores Práticas 2025')
+		formatString: 0
+		lineageTag: f53d119f-4aac-46a7-ba1b-bd94eba48670
+
+	measure 'Projetos Melhores Práticas 2024' = ```
+			
+			VAR Resultado = 
+			    CALCULATE(
+			        COUNTROWS('Todos os Projetos'),
+			        'Todos os Projetos'[Edital] = "Melhores Práticas 2024"
+			    )
+			RETURN
+			    IF(ISBLANK(Resultado), 0, Resultado)
+			```
+		formatString: 0
+		lineageTag: 4594b627-9cd4-4f28-92cd-a45818abce83
+
+	column 'Departamento Regional'
+		dataType: string
+		lineageTag: c0c1ad10-63ab-4e89-a926-7fe724092825
+		summarizeBy: none
+		sourceColumn: Departamento Regional
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado sem acento'
+		dataType: string
+		lineageTag: dfad1ac6-19f4-4d72-b125-ed5edbd32eb9
+		summarizeBy: none
+		sourceColumn: Estado sem acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado com acento'
+		dataType: string
+		lineageTag: 74941a01-2375-4d79-bc33-ff6e25978970
+		summarizeBy: none
+		sourceColumn: Estado com acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		dataType: string
+		lineageTag: 901463be-aa57-4a3f-b089-3d8cfc9af742
+		summarizeBy: none
+		sourceColumn: Núcleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Responsável pelo projeto'
+		dataType: string
+		lineageTag: a84b3e4e-a1e1-4f9a-aae4-badc71365c40
+		summarizeBy: none
+		sourceColumn: Responsável pelo projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email do responsável pelo projeto'
+		dataType: string
+		lineageTag: 1650e2b1-259e-42c5-9e8f-6388b2111167
+		summarizeBy: none
+		sourceColumn: Email do responsável pelo projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do projeto'
+		dataType: string
+		lineageTag: 4452b3c9-bd41-424d-aacd-ef2cfe5de467
+		summarizeBy: none
+		sourceColumn: Nome do projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Breve descrição do projeto'
+		dataType: string
+		lineageTag: 58991f96-3048-4d85-b7f1-93580fda46f2
+		summarizeBy: none
+		sourceColumn: Breve descrição do projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Edital Melhores Práticas 2024' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Editais/EditalMelhoresPraticas2024.xlsx"), null, true),
+				    #"Edital Melhores Práticas 2024_Sheet" = Fonte{[Item="Edital Melhores Práticas 2024",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Edital Melhores Práticas 2024_Sheet",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Departamento Regional", type text}, {"Estado sem acento", type text}, {"Estado com acento", type text}, {"Núcleo", type text}, {"Responsável pelo projeto", type text}, {"Email do responsável pelo projeto", type text}, {"Nome do projeto", type text}, {"Breve descrição do projeto", type text}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

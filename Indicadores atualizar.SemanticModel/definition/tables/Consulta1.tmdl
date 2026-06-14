@@ -1,0 +1,81 @@
+table Consulta1
+	lineageTag: e193367f-5a67-4438-a58b-1fae73000b61
+
+	column Name
+		dataType: string
+		lineageTag: 82700ba1-9216-4b2a-bf52-8983458fd23f
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Extension
+		dataType: string
+		lineageTag: 753383af-3080-4637-851b-e99c95d604bb
+		summarizeBy: none
+		sourceColumn: Extension
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date accessed'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8b01ee92-673f-40df-b55b-9bb199968b17
+		summarizeBy: none
+		sourceColumn: Date accessed
+
+		variation Variation
+			isDefault
+			relationship: add5fe41-f1ff-49b2-a433-8c354d5abb1e
+			defaultHierarchy: LocalDateTable_b5933f81-47ef-424c-8f51-3f15f3ba17e1.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date modified'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ba8f55f4-c0a6-4aa6-8274-bf0de2ca9c6e
+		summarizeBy: none
+		sourceColumn: Date modified
+
+		variation Variation
+			isDefault
+			relationship: 38a3d114-2ae3-479a-9917-9536228b476e
+			defaultHierarchy: LocalDateTable_c5b774cd-7643-4240-83d7-6188b646d637.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date created'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b422968f-032f-4528-bd99-471dad4e2ff2
+		summarizeBy: none
+		sourceColumn: Date created
+
+		variation Variation
+			isDefault
+			relationship: 3f6c1af0-2574-43f2-9022-48e764182a45
+			defaultHierarchy: LocalDateTable_5265a821-3fe6-4dce-b49e-be943be4bcb7.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Folder Path'
+		dataType: string
+		lineageTag: a3b9a175-072c-412a-a2ed-2766db33cf8b
+		summarizeBy: none
+		sourceColumn: Folder Path
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Consulta1 = m
+		mode: import
+		source =
+				let
+				    Fonte = SharePoint.Files("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias", [ApiVersion = 15])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

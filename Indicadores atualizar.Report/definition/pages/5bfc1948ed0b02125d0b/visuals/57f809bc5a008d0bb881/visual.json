@@ -1,0 +1,169 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "57f809bc5a008d0bb881",
+  "position": {
+    "x": 718.15771109560353,
+    "y": 267.07606420097693,
+    "z": 9000,
+    "height": 432.32379623168174,
+    "width": 543.08443824145149,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Espaço Docente - usuários"
+                    }
+                  },
+                  "Property": "Selecione seu DR"
+                }
+              },
+              "queryRef": "Espaço Docente - usuários.Selecione seu Departamento Regional",
+              "nativeQueryRef": "Departamento Regional",
+              "displayName": "Departamento Regional"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Espaço Docente - usuários"
+                        }
+                      },
+                      "Property": "Selecione seu DR"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "Count(Espaço Docente - usuários.Selecione seu Departamento Regional)",
+              "nativeQueryRef": "Usuários",
+              "displayName": "Usuários"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Espaço Docente - usuários"
+                  }
+                },
+                "Property": "Selecione seu DR"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "192.0749639215629D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Espaço Docente - usuários.Selecione seu Departamento Regional"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "328.0761596802534D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Count(Espaço Docente - usuários.Selecione seu Departamento Regional)"
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

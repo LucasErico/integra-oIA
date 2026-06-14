@@ -1,0 +1,47 @@
+table Saúde
+	lineageTag: d7bf8d9c-b4bf-4279-bc2d-4fcabe061b84
+
+	column Column1
+		dataType: string
+		lineageTag: afac58e0-9105-4655-a678-cf980e3ac8b3
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: d7a27cdb-4211-4bd1-acd0-b5c9ab22fc8b
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: string
+		lineageTag: 3ea3708e-e867-45d7-ae41-4396c9301eed
+		summarizeBy: none
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column4
+		dataType: string
+		lineageTag: 761a65c4-2378-4fba-b78a-2bd8b9a7f12b
+		summarizeBy: none
+		sourceColumn: Column4
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Saúde = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Interlocutores/INTERLOCUTORES.xlsx"), null, true),
+				    Saúde_Sheet = Fonte{[Item="Saúde",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Saúde_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

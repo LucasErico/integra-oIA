@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Indicadores atualizar"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b9159a23-8ac0-4c41-b97c-8ee757b8877d"
+  }
+}

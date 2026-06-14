@@ -1,0 +1,105 @@
+table 'Estados - Canva'
+	lineageTag: 024e2435-c19a-4929-9710-c904b3a03ed2
+
+	column 'Departamento Regional'
+		dataType: string
+		lineageTag: 26421111-d1f8-45ef-83ad-7dd3ca32f4d9
+		summarizeBy: none
+		sourceColumn: Departamento Regional
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado sem acento'
+		dataType: string
+		lineageTag: 383650bf-9702-4e7e-868c-785c389b90bc
+		summarizeBy: none
+		sourceColumn: Estado sem acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado com acento'
+		dataType: string
+		lineageTag: 31f5d1f3-33dc-4f09-a686-3d0af86ddab9
+		summarizeBy: none
+		sourceColumn: Estado com acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		dataType: string
+		lineageTag: f81beb96-ef2f-49b9-89ff-5d4a6f500ca3
+		summarizeBy: none
+		sourceColumn: Núcleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Número de alunos'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d37f123-8fd7-4b56-8cea-0ffa3648d94f
+		summarizeBy: sum
+		sourceColumn: Número de alunos
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Número de staffs'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b6f5cc3-e2fc-41b5-a5df-d40ecb954fbb
+		summarizeBy: sum
+		sourceColumn: Número de staffs
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total
+		dataType: int64
+		formatString: 0
+		lineageTag: df851dd6-05b7-4fa8-873f-2436081a76f5
+		summarizeBy: sum
+		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Usuários que criaram a conta'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad30a669-f760-4502-bd63-2711ded13acc
+		summarizeBy: sum
+		sourceColumn: Usuários que criaram a conta
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Usuários que efetivamente usaram o canva'
+		dataType: int64
+		formatString: 0
+		lineageTag: ffac5b50-e160-4cca-968f-e600acf914ff
+		summarizeBy: sum
+		sourceColumn: Usuários que efetivamente usaram o canva
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Designs criados'
+		dataType: double
+		formatString: 0
+		lineageTag: 96803fa0-60d4-4a59-a349-04c5215ad540
+		summarizeBy: sum
+		sourceColumn: Designs criados
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Estados - Canva' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Canva/dados-canva.xlsx"), null, true),
+				    Estados_Sheet = Fonte{[Item="Estados",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Estados_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Departamento Regional", type text}, {"Estado sem acento", type text}, {"Estado com acento", type text}, {"Núcleo", type text}, {"Número de alunos", Int64.Type}, {"Número de staffs", Int64.Type}, {"Total", Int64.Type}, {"Usuários que criaram a conta", Int64.Type}, {"Usuários que efetivamente usaram o canva", Int64.Type}, {"Designs criados", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado",2167,2167,Replacer.ReplaceValue,{"Designs criados"})
+				in
+				    #"Valor Substituído"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

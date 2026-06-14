@@ -1,0 +1,48 @@
+table 'Tecnologias Educacionais'
+	lineageTag: b16175ff-e33e-4fe6-90ee-47c0eee98d88
+
+	column Column1
+		dataType: string
+		lineageTag: f57504dd-dbfd-43d6-b4a1-154043093056
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: a7a743bc-b28a-4351-a304-839fd4372a21
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: string
+		lineageTag: 85ed64a6-e7ad-4e81-b766-66b6041f5d2d
+		summarizeBy: none
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column4
+		dataType: string
+		lineageTag: 12e4aae2-fb40-4ab5-804d-f6146ed92659
+		summarizeBy: none
+		sourceColumn: Column4
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tecnologias Educacionais' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Interlocutores/INTERLOCUTORES.xlsx"), null, true),
+				    #"Tecnologias Educacionais_Sheet" = Fonte{[Item="Tecnologias Educacionais",Kind="Sheet"]}[Data]
+				in
+				    #"Tecnologias Educacionais_Sheet"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

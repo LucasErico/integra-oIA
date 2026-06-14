@@ -1,0 +1,29 @@
+table Calendarie
+	lineageTag: c1ccf9ae-a0cf-4c5e-b608-a4e759a85b87
+
+	column Date
+		formatString: Short Date
+		lineageTag: 8fe4c4ae-d95f-4b86-b460-6c21eaedc50e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: ed198b57-2a5b-4222-a6f4-db662931181b
+			defaultHierarchy: LocalDateTable_f21cb547-83d1-434f-9f91-b833b49571fc.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendarie = calculated
+		mode: import
+		source = ```
+				
+				CALENDAR(
+				    MIN('usuarios-total-ed'[Data de Cadastro]), 
+				    MAX('usuarios-total-ed'[Data de Cadastro])
+				)
+				```
+
+	annotation PBI_Id = 80d6ff29a67f465db833714d494a1426
+

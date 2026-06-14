@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "2f599b85ce20e4b2dc56",
+  "position": {
+    "x": 0,
+    "y": 67,
+    "z": 6000,
+    "height": 173,
+    "width": 320,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "LabSaude"
+                    }
+                  },
+                  "Property": "unidade"
+                }
+              },
+              "queryRef": "LabSaude.unidade",
+              "nativeQueryRef": "Nome da unidade",
+              "displayName": "Nome da unidade"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "300D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "LabSaude.unidade"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

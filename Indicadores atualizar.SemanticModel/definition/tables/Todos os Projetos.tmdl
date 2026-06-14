@@ -1,0 +1,202 @@
+table 'Todos os Projetos'
+	lineageTag: 27849a7c-ff70-4b1c-bcea-6e783dce5bf2
+
+	measure 'Total Sem Filtros' = CALCULATE(COUNTROWS('Todos os Projetos'), ALLSELECTED('Todos os Projetos'))
+		formatString: 0
+		lineageTag: e6149740-cb75-4114-bdbf-409ce73253aa
+
+	measure 'Total Força Bruta' = ```
+			
+			VAR TabelaResumo = 
+			    SUMMARIZE(
+			        'Todos os Projetos', 
+			        'Todos os Projetos'[Departamento Regional], 
+			        'Todos os Projetos'[Edital],
+			        "Contagem", COUNTROWS('Todos os Projetos')
+			    )
+			RETURN
+			    SUMX(TabelaResumo, [Contagem])
+			```
+		formatString: 0
+		lineageTag: f8c7eedd-753a-4a56-82cb-b54106fc8a76
+
+	column 'Departamento Regional'
+		lineageTag: d664b5b0-7cad-4e68-84d6-bc9d45268e5e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Departamento Regional]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado
+		lineageTag: aa1087e7-6042-4b65-b487-139c42e0383d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Estado]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		lineageTag: 3fc901ea-63ce-4fa9-82ce-bdcea60b2c88
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Núcleo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Responsável
+		lineageTag: c37b81be-3f04-4826-8bd6-c090eb5f4ec9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Responsável]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		lineageTag: e8289638-5a21-4430-9b32-f989720f56aa
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Email]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do Projeto'
+		lineageTag: 72649ef6-f967-4e67-828f-66174c9de554
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Nome do Projeto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Edital
+		lineageTag: 85d8de1c-0e09-4154-ae44-a351c1fd50b9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Edital]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		formatString: 0
+		lineageTag: c3b783c4-ef6f-4484-a6a8-0b9fe456114c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Edital'
+		lineageTag: 66b53422-7b74-4bcf-94aa-4c021937ed82
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Tipo Edital]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Todos os Projetos' = calculated
+		mode: import
+		source =
+				
+				
+				UNION(
+				
+				    SELECTCOLUMNS(
+				
+				        'Edital Inova 2023',
+				
+				        "Departamento Regional", 'Edital Inova 2023'[Departamento Regional],
+				
+				        "Estado", 'Edital Inova 2023'[Estado sem acento],
+				
+				        "Núcleo", 'Edital Inova 2023'[Núcleo],
+				
+				        "Responsável", 'Edital Inova 2023'[Responsável pelo projeto],
+				
+				        "Email", 'Edital Inova 2023'[Email do responsável pelo projeto],
+				
+				        "Nome do Projeto", 'Edital Inova 2023'[Nome do projeto],
+				
+				        "Edital", "Inova 2023",
+				
+				        "Ano", 2023,
+				
+				        "Tipo Edital", "Inova"
+				
+				    ),
+				
+				    SELECTCOLUMNS(
+				
+				        'Edital Inova 2024',
+				
+				        "Departamento Regional", 'Edital Inova 2024'[Departamento Regional],
+				
+				        "Estado", 'Edital Inova 2024'[Estado sem acento],
+				
+				        "Núcleo", 'Edital Inova 2024'[Núcleo],
+				
+				        "Responsável", 'Edital Inova 2024'[Responsável pelo projeto],
+				
+				        "Email", 'Edital Inova 2024'[Email do responsável pelo projeto],
+				
+				        "Nome do Projeto", 'Edital Inova 2024'[Nome do projeto],
+				
+				        "Edital", "Inova 2024",
+				
+				        "Ano", 2024,
+				
+				        "Tipo Edital", "Inova"
+				
+				    ),
+				
+				    SELECTCOLUMNS(
+				
+				        'Edital Melhores Práticas 2024',
+				
+				        "Departamento Regional", 'Edital Melhores Práticas 2024'[Departamento Regional],
+				
+				        "Estado", 'Edital Melhores Práticas 2024'[Estado sem acento],
+				
+				        "Núcleo", 'Edital Melhores Práticas 2024'[Núcleo],
+				
+				        "Responsável", 'Edital Melhores Práticas 2024'[Responsável pelo projeto],
+				
+				        "Email", 'Edital Melhores Práticas 2024'[Email do responsável pelo projeto],
+				
+				        "Nome do Projeto", 'Edital Melhores Práticas 2024'[Nome do projeto],
+				
+				        "Edital", "Melhores Práticas 2024",
+				
+				        "Ano", 2024,
+				
+				        "Tipo Edital", "Melhores Práticas"
+				
+				    ),
+				
+				    SELECTCOLUMNS(
+				
+				        'Edital Melhores Práticas 2025',
+				
+				        "Departamento Regional", 'Edital Melhores Práticas 2025'[Departamento Regional],
+				
+				        "Estado", 'Edital Melhores Práticas 2025'[Estado sem acento],
+				
+				        "Núcleo", 'Edital Melhores Práticas 2025'[Núcleo],
+				
+				        "Responsável", 'Edital Melhores Práticas 2025'[Responsável pelo projeto],
+				
+				        "Email", 'Edital Melhores Práticas 2025'[Email do responsável pelo projeto],
+				
+				        "Nome do Projeto", 'Edital Melhores Práticas 2025'[Nome do projeto],
+				
+				        "Edital", "Melhores Práticas 2025",
+				
+				        "Ano", 2025,
+				
+				        "Tipo Edital", "Melhores Práticas"
+				
+				    )
+				
+				)
+
+	annotation PBI_Id = 3319efdbb9ef4227b43177d893ade51d
+

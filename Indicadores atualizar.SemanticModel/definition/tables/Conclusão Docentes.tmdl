@@ -1,0 +1,110 @@
+table 'Conclusão Docentes'
+	lineageTag: 7da92fb9-8a79-4dbb-8e92-8d32610e95fb
+
+	measure 'Total de Projetos' = ```
+			
+			VAR ProjetosInova2023 = COUNTROWS('Edital Inova 2023')
+			VAR ProjetosInova2024 = COUNTROWS('Edital Inova 2024')
+			VAR ProjetosMelhores2024 = COUNTROWS('Edital Melhores Práticas 2024')
+			VAR ProjetosMelhores2025 = COUNTROWS('Edital Melhores Práticas 2025')
+			
+			RETURN
+			    ProjetosInova2023 + 
+			    ProjetosInova2024 + 
+			    ProjetosMelhores2024 + 
+			    ProjetosMelhores2025
+			```
+		formatString: 0
+		lineageTag: e9831118-2b90-47b4-aaef-bb40af1b4d91
+
+	measure 'Total Unidades Tooltip' =
+			
+			CALCULATE(COUNTROWS('LabSaude'))
+		formatString: 0
+		lineageTag: 3ac8d304-236b-4f1d-9433-24a89e670550
+
+	measure 'Contagem Tabela Unificada' = COUNTROWS('Todos os Projetos')
+		formatString: 0
+		lineageTag: 6f1f5660-ab01-4e5c-b39a-a06eb3a0615f
+
+	column 'Departamento Regional'
+		dataType: string
+		lineageTag: 416b1089-60b7-43cc-a417-47aaf4348962
+		summarizeBy: none
+		sourceColumn: Departamento Regional
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estados sem acento'
+		dataType: string
+		lineageTag: a1d5be7a-44b1-47be-a688-54a67eb2f4a6
+		summarizeBy: none
+		sourceColumn: Estados sem acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estados com acento'
+		dataType: string
+		lineageTag: 2b55066c-8104-40d4-9ded-a6f2a5404932
+		summarizeBy: none
+		sourceColumn: Estados com acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		dataType: string
+		lineageTag: 8e3ed5a9-801a-41b5-9c87-601eee519bcb
+		summarizeBy: none
+		sourceColumn: Núcleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Inscritos
+		dataType: int64
+		formatString: 0
+		lineageTag: b44fa1eb-5142-4f8a-bc54-4f3dddf51ef2
+		summarizeBy: sum
+		sourceColumn: Inscritos
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Não iniciado'
+		dataType: int64
+		formatString: 0
+		lineageTag: 617c3a01-9b6c-4d9d-8631-54fe7de3812e
+		summarizeBy: sum
+		sourceColumn: Não iniciado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Em andamento'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c005241-71c4-407f-be2a-052fb2ad6ef6
+		summarizeBy: sum
+		sourceColumn: Em andamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Concluídos
+		dataType: int64
+		formatString: 0
+		lineageTag: 134f37d1-994a-48a3-880a-cc74158c2352
+		summarizeBy: sum
+		sourceColumn: Concluídos
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Conclusão Docentes' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Canva/CursoCanva.xlsx"), null, true),
+				    #"Conclusão Docentes _Sheet" = Fonte{[Item="Conclusão Docentes ",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Conclusão Docentes _Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Departamento Regional", type text}, {"Estados sem acento", type text}, {"Estados com acento", type text}, {"Núcleo", type text}, {"Inscritos", Int64.Type}, {"Não iniciado", Int64.Type}, {"Em andamento", Int64.Type}, {"Concluídos", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

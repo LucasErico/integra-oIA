@@ -1,0 +1,107 @@
+table Usuarios-ativos-mes-Canva
+	lineageTag: 13bb24da-ae11-4386-a395-94b0655f6526
+
+	measure '% Crescimento Mês' =
+			
+			VAR UsuariosMesAtual = SUM('Usuarios-ativos-mes-Canva'[Usuários ativos])
+			
+			VAR UsuariosMesAnterior =
+			    CALCULATE(
+			        SUM('Usuarios-ativos-mes-Canva'[Usuários ativos]),
+			        PREVIOUSMONTH('Usuarios-ativos-mes-Canva'[Data])
+			    )
+			
+			RETURN
+			IF(
+			    ISBLANK(UsuariosMesAnterior),
+			    0,
+			    DIVIDE(UsuariosMesAtual - UsuariosMesAnterior, UsuariosMesAnterior)
+			)
+		lineageTag: 18be3a2f-9bd5-4fbc-b5c7-61b78bfe8c70
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Crescimento Último Mês' =
+			
+			VAR DataMaisRecente =
+			    MAX('Usuarios-ativos-mes-Canva'[Data])
+			
+			VAR MesAtual = MONTH(DataMaisRecente)
+			VAR AnoAtual = YEAR(DataMaisRecente)
+			
+			VAR MesAnterior = MesAtual - 1
+			VAR AnoMesAnterior =
+			    IF(MesAtual = 1, AnoAtual - 1, AnoAtual)
+			
+			VAR UsuariosMesAtual =
+			    CALCULATE(
+			        SUM('Usuarios-ativos-mes-Canva'[Usuários ativos]),
+			        MONTH('Usuarios-ativos-mes-Canva'[Data]) = MesAtual,
+			        YEAR('Usuarios-ativos-mes-Canva'[Data]) = AnoAtual
+			    )
+			
+			VAR UsuariosMesAnterior =
+			    CALCULATE(
+			        SUM('Usuarios-ativos-mes-Canva'[Usuários ativos]),
+			        MONTH('Usuarios-ativos-mes-Canva'[Data]) = MesAnterior,
+			        YEAR('Usuarios-ativos-mes-Canva'[Data]) = AnoMesAnterior
+			    )
+			
+			RETURN
+			DIVIDE(UsuariosMesAtual - UsuariosMesAnterior, UsuariosMesAnterior)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 30b0cf15-4363-44e0-a880-320a5aef2b1e
+
+	column Mês
+		dataType: string
+		lineageTag: dc7e9a3c-96bc-483c-b77a-6ffe1bf6a916
+		summarizeBy: none
+		sourceColumn: Mês
+		sortByColumn: Data
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Usuários ativos'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e09fd6c-33a2-4e9d-bda3-eeacb1b2b245
+		summarizeBy: sum
+		sourceColumn: Usuários ativos
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ce8c602e-ceea-4f3b-8e3c-4cfab96a0cea
+		summarizeBy: none
+		sourceColumn: Data
+
+		variation Variation
+			isDefault
+			relationship: 16812378-1002-4fbc-bd23-5bac60a7d3ae
+			defaultHierarchy: LocalDateTable_dccf731a-50c4-4b05-a385-86f85763f792.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Usuarios-ativos-mes-Canva = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Canva/Usuarios%20ativos%20mes%20Canva.xlsx"), null, true),
+				    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Mês", type text}, {"Usuários ativos", Int64.Type}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Tipo Alterado", "Data", each "01/" & [Mês] & "/2026"),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"Data", type date}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

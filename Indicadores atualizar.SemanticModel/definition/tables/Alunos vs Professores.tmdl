@@ -1,0 +1,55 @@
+table 'Alunos vs Professores'
+	lineageTag: 1e634d29-3844-4987-97cf-f6f95adda36f
+
+	column Mês
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4d8746ed-1f4a-41ca-bfd7-aea76ee7d669
+		summarizeBy: none
+		sourceColumn: Mês
+
+		variation Variation
+			isDefault
+			relationship: 0910bdff-c10a-4b0c-995c-5f87c22effc9
+			defaultHierarchy: LocalDateTable_61b51fa4-671c-4afe-a61a-a90ae142c48b.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Alunos
+		dataType: int64
+		formatString: 0
+		lineageTag: c1749613-7699-4552-9e5c-eb818d685f2d
+		summarizeBy: sum
+		sourceColumn: Alunos
+
+		annotation SummarizationSetBy = Automatic
+
+	column Docentes
+		dataType: double
+		formatString: 0
+		lineageTag: 9267f21e-9d73-4322-99b0-955cbc06be90
+		summarizeBy: sum
+		sourceColumn: Docentes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Alunos vs Professores' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Canva/recursoscnva.xlsx"), null, true),
+				    #"Alunos vs Professores_Sheet" = Fonte{[Item="Alunos vs Professores",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Alunos vs Professores_Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Mês", type date}, {"Alunos", Int64.Type}, {"Docentes", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado",null,#date(2025, 9, 1),Replacer.ReplaceValue,{"Mês"}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Valor Substituído",{"Column4", "Column5", "Column6", "Column7", "Column8"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Colunas Removidas",57996,57996,Replacer.ReplaceValue,{"Docentes"})
+				in
+				    #"Valor Substituído1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

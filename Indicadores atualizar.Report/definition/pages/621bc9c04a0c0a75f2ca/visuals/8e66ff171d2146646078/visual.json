@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "8e66ff171d2146646078",
+  "position": {
+    "x": 33.069908814589667,
+    "y": 482.43161094224928,
+    "z": 3000,
+    "height": 176.048632218845,
+    "width": 563.161094224924,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tecnologias Educacionais"
+                    }
+                  },
+                  "Property": "Column4"
+                }
+              },
+              "queryRef": "Tecnologias Educacionais.Column4",
+              "nativeQueryRef": "Departamento Regional",
+              "displayName": "Departamento Regional"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tecnologias Educacionais"
+                    }
+                  },
+                  "Property": "Column1"
+                }
+              },
+              "queryRef": "Tecnologias Educacionais.Column1",
+              "nativeQueryRef": "Contato",
+              "displayName": "Contato"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Tecnologias Educacionais"
+                  }
+                },
+                "Property": "Column4"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "364.9011208586359D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tecnologias Educacionais.Column1"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "175.7963506733409D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tecnologias Educacionais.Column4"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

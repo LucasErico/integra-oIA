@@ -1,0 +1,46 @@
+table 'Crescimento do uso'
+	lineageTag: 198c9ec8-fbac-44b5-b603-a4818db361ee
+
+	column Mês
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 43a2d653-0123-45b9-853b-7746a96d6135
+		summarizeBy: none
+		sourceColumn: Mês
+
+		variation Variation
+			isDefault
+			relationship: 8c9b4dd6-59c1-4354-bc05-5204f0083853
+			defaultHierarchy: LocalDateTable_bd5cc783-3a0f-4b93-8b24-369896aa3639.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Designs criados'
+		dataType: double
+		formatString: 0
+		lineageTag: bffef46e-fab1-4b37-a5d6-454eb393e0ce
+		summarizeBy: sum
+		sourceColumn: Designs criados
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Crescimento do uso' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Canva/crescimento%20do%20uso.xlsx"), null, true),
+				    #"Crescimento do uso_Sheet" = Fonte{[Item="Crescimento do uso",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Crescimento do uso_Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Mês", type date}, {"Designs criados", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado",274185,274185,Replacer.ReplaceValue,{"Designs criados"}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Valor Substituído",{"Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Colunas Removidas",274400,274400,Replacer.ReplaceValue,{"Designs criados"})
+				in
+				    #"Valor Substituído1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

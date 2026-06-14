@@ -1,0 +1,33 @@
+table Tabela
+	lineageTag: 5c373576-701b-43ce-852b-2e5c9f46f2c3
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: e886bdf9-509d-41e5-a36c-e73bec113971
+		summarizeBy: none
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Usuários
+		dataType: string
+		lineageTag: 69ac5108-26d4-4a97-9935-e13ed2a643b0
+		summarizeBy: none
+		sourceColumn: Usuários
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tabela = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMjIwMlXSUTI0tjBQitUB882AfBNjy5g8IKEUGwsA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Ano = _t, Usuários = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Ano", Int64.Type}, {"Usuários", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

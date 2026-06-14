@@ -1,0 +1,127 @@
+table DadosAgostoCanva
+	lineageTag: dbcb0a41-483a-43bc-8dd9-d22f34872b58
+
+	measure KPI1 = ```
+			VAR Valor = SUM(DadosAgostoCanva[Usuários que efetivamente usaram o canva])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        Valor >= 1000000, FORMAT(Valor / 1000000, "0.0") & "M",
+			        Valor >= 1000, FORMAT(Valor / 1000, "0") & "K",
+			        FORMAT(Valor, "0")
+			    )
+			
+			```
+		lineageTag: e8e6cc8b-a1c2-4fbf-8a39-9dadd2ec2ef6
+
+		changedProperty = IsHidden
+
+	measure KPI3 = ```
+			VAR Valor = SUM(DadosAgostoCanva[Designs criados])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        Valor >= 1000000, FORMAT(Valor / 1000000, "0.0") & "M",
+			        Valor >= 1000, FORMAT(Valor / 1000, "0") & "K",
+			        FORMAT(Valor, "0")
+			    )
+			
+			```
+		lineageTag: 6f4fb0df-676b-41e0-9167-9c38dea9a628
+
+		changedProperty = IsHidden
+
+	column DR
+		dataType: string
+		lineageTag: d009ae62-a57a-4741-a7cb-c114323a820d
+		summarizeBy: none
+		sourceColumn: DR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado sem acento'
+		dataType: string
+		lineageTag: 7a22259a-85c6-48cb-9ac0-1028673e65bd
+		summarizeBy: none
+		sourceColumn: Estado sem acento
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado com acento'
+		dataType: string
+		lineageTag: 811c5e18-cff2-47dc-a61d-07f471e74d2a
+		summarizeBy: none
+		sourceColumn: Estado com acento
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		dataType: string
+		lineageTag: 2f1d0f27-43c8-4d1b-9ae2-58cb865632bd
+		summarizeBy: none
+		sourceColumn: Núcleo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Usuários que criaram a conta'
+		dataType: int64
+		formatString: 0
+		lineageTag: abb2ce07-de9e-44ae-8381-16a445c49358
+		summarizeBy: sum
+		sourceColumn: Usuários que criaram a conta
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Usuários que efetivamente usaram o canva'
+		dataType: int64
+		formatString: 0
+		lineageTag: 86d3d9c1-005f-4766-8a03-d41ec2406ad6
+		summarizeBy: sum
+		sourceColumn: Usuários que efetivamente usaram o canva
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Designs criados'
+		dataType: double
+		formatString: 0
+		lineageTag: 92bb2774-c235-40a0-9448-e47a47b4212c
+		summarizeBy: sum
+		sourceColumn: Designs criados
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DadosAgostoCanva = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Canva/DadosAgostoCanva.xlsx"), null, true),
+				    DadosAgostoCanva_Sheet = Fonte{[Item="DadosAgostoCanva",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(DadosAgostoCanva_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"DR", type text}, {"Estado sem acento", type text}, {"Estado com acento", type text}, {"Núcleo", type text}, {"Usuários que criaram a conta", Int64.Type}, {"Usuários que efetivamente usaram o canva", Int64.Type}, {"Designs criados", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado",265631,265631,Replacer.ReplaceValue,{"Designs criados"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído",534701,534701,Replacer.ReplaceValue,{"Designs criados"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1",50229,50229,Replacer.ReplaceValue,{"Designs criados"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2",523360,523360,Replacer.ReplaceValue,{"Designs criados"})
+				in
+				    #"Valor Substituído3"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

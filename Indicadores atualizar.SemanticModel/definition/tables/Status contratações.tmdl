@@ -1,0 +1,163 @@
+table 'Status contratações'
+	lineageTag: c6a4a1a1-3928-4277-a54c-4928e3e53f08
+
+	measure 'Projetos Concluídos' =
+			
+			CALCULATE(
+			    COUNTROWS('Status contratações'),
+			    'Status contratações'[Status] = "Concluído"
+			)
+		formatString: 0
+		lineageTag: 520c4225-35f4-46b9-89a9-3878fedad232
+
+	measure 'Projetos em Desenvolvimento' =
+			
+			CALCULATE(
+			    COUNTROWS('Status contratações'),
+			    'Status contratações'[Status] <> "Concluído"
+			)
+		formatString: 0
+		lineageTag: 7956438c-1bf1-4aca-9763-4e327a75f559
+
+	measure 'P1 - Título' = "Revisor de PCN com IA"
+		lineageTag: 574b9b8c-f679-4470-8267-a9e27acf1027
+
+	measure 'P1 - Status' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Revisor de PCN com IA")
+			RETURN "Status: " & MAXX(Projeto, 'Status contratações'[Status])
+		lineageTag: 8ba5e12d-b384-4c85-be79-8da3e5c1d94a
+
+	measure 'P1 - Data' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Revisor de PCN com IA")
+			RETURN "Atualizado: " & FORMAT(MAXX(Projeto, 'Status contratações'[Última atualização]), "DD/MM/YYYY")
+		lineageTag: 21484d12-11a2-4dd6-b7df-10067da580fa
+
+	measure 'P2 - Título' = "Revisor de PTD com IA"
+		lineageTag: 7e08d1eb-1488-402a-98c8-aeac697ae6cd
+
+	measure 'P2 - Status' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Revisor de PTD com IA")
+			RETURN "Status: " & MAXX(Projeto, 'Status contratações'[Status])
+		lineageTag: 8e8a7a8b-e2de-48c4-b5d6-26cbf8fc4b40
+
+	measure 'P2 - Data' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Revisor de PTD com IA")
+			RETURN "Atualizado: " & FORMAT(MAXX(Projeto, 'Status contratações'[Última atualização]), "DD/MM/YYYY")
+		lineageTag: c21c82cd-bac7-49db-94b2-83604fd34255
+
+	measure 'P3 - Título' = "Aquisição de Jogo de Simulações de Gestão"
+		lineageTag: 59e7f7b9-a17f-40cf-a10c-21c0251fffaf
+
+	measure 'P3 - Status' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Aquisição de Jogos de Simulações de Gestão")
+			RETURN "Status: " & MAXX(Projeto, 'Status contratações'[Status])
+		lineageTag: 47775c9e-7109-4ef1-ae29-c4734e65adea
+
+	measure 'P3 - Data' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Aquisição de Jogos de Simulações de Gestão")
+			RETURN "Atualizado: " & FORMAT(MAXX(Projeto, 'Status contratações'[Última atualização]), "DD/MM/YYYY")
+		lineageTag: 3ac3a572-060e-44f7-860e-3207bffff50b
+
+	measure 'P4 - Título' = "Desenvolvimento do Portal de Simulação"
+		lineageTag: 2a0deed9-4f8b-41be-a78e-0569475c02d0
+
+	measure 'P4 - Status' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Desenvolvimento do Portal de Simulação")
+			RETURN "Status: " & MAXX(Projeto, 'Status contratações'[Status])
+		lineageTag: 464c1ac8-8df2-4e45-a61b-3ac1e04e7ef0
+
+	measure 'P4 - Data' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Desenvolvimento do Portal de Simulação")
+			RETURN "Atualizado: " & FORMAT(MAXX(Projeto, 'Status contratações'[Última atualização]), "DD/MM/YYYY")
+		lineageTag: 1171b841-8c14-4479-960b-31cc89843064
+
+	measure 'P1 - Conclusao' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Revisor de PCN com IA")
+			RETURN "Previsão de Conclusão: " & FORMAT(MAXX(Projeto, 'Status contratações'[Previsão de Conclusão]), "DD/MM/YYYY")
+		lineageTag: 0c96a8ad-7f23-4f9e-b0a0-9982fe619c66
+
+	measure 'P2 - Conclusao' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Revisor de PTD com IA")
+			RETURN "Previsão de Conclusão: " & FORMAT(MAXX(Projeto, 'Status contratações'[Previsão de Conclusão]), "DD/MM/YYYY")
+		lineageTag: 3685ca5d-4b27-4514-b6f4-e97695dc31eb
+
+	measure 'P3 - Conclusao' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Aquisição de Jogos de Simulações de Gestão")
+			RETURN "Previsão de Conclusão: " & FORMAT(MAXX(Projeto, 'Status contratações'[Previsão de Conclusão]), "DD/MM/YYYY")
+		lineageTag: 3e2ea2b8-dd34-4376-b0d4-4cb3e2e28259
+
+	measure 'P4 - Conclusao' =
+			
+			VAR Projeto = FILTER('Status contratações', 'Status contratações'[Projetos] = "Desenvolvimento do Portal de Simulação")
+			RETURN "Previsão de Conclusão: " & FORMAT(MAXX(Projeto, 'Status contratações'[Previsão de Conclusão]), "DD/MM/YYYY")
+		lineageTag: b5497b4e-1d82-4506-8625-1a3653eba23b
+
+	column Projetos
+		dataType: string
+		lineageTag: e17f1848-399e-4f34-a252-1d7420022c68
+		summarizeBy: none
+		sourceColumn: Projetos
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 47833693-4fc5-4491-957b-a1d5a5a697b5
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Última atualização'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 700b664b-df97-42d1-82a1-b806395be644
+		summarizeBy: none
+		sourceColumn: Última atualização
+
+		variation Variation
+			isDefault
+			relationship: 800fd3d2-5714-4f99-94e0-4a28a3698657
+			defaultHierarchy: LocalDateTable_3b10746a-4b1f-44fd-bb12-3cb7d36bb7bb.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Previsão de Conclusão'
+		dataType: string
+		lineageTag: 0243a941-76c2-4836-9317-1c010d1bb61f
+		summarizeBy: none
+		sourceColumn: Previsão de Conclusão
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Status contratações' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Contrata%C3%A7%C3%B5es/Status%20contrata%C3%A7%C3%B5es.xlsx"), null, true),
+				    #"Status contratações_Sheet" = Fonte{[Item="Status contratações",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Status contratações_Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Projetos", type text}, {"Status", type text}, {"Última atualização", type date}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado",#date(2025, 12, 30),#date(2025, 12, 30),Replacer.ReplaceValue,{"Previsão de Conclusão"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Aquisição de Jogo  de Simulações de Gestão","Aquisição de Jogos de Simulações de Gestão",Replacer.ReplaceText,{"Projetos"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","Edital em desenvolvimento pela Aquisição","Edital em desenvolvimento pela aquisição",Replacer.ReplaceText,{"Status"})
+				in
+				    #"Valor Substituído2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

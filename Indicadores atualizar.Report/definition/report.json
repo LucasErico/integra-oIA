@@ -1,0 +1,229 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY24SU10",
+      "reportVersionAtImport": {
+        "visual": "1.8.95",
+        "report": "2.0.95",
+        "page": "1.3.95"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "brazil.states.topo",
+          "path": "Shapemaps/brazil.states.topo.json",
+          "type": "ShapeMap"
+        },
+        {
+          "name": "CY24SU10",
+          "path": "BaseThemes/CY24SU10.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "bg-resumo5432645563048489.png",
+          "path": "bg-resumo5432645563048489.png",
+          "type": "Image"
+        },
+        {
+          "name": "bg-test-312133249324828321.png",
+          "path": "bg-test-312133249324828321.png",
+          "type": "Image"
+        },
+        {
+          "name": "brazil_(1)15942054841747388.png",
+          "path": "brazil_(1)15942054841747388.png",
+          "type": "Image"
+        },
+        {
+          "name": "briefcase-medical-solid3741873800424729.png",
+          "path": "briefcase-medical-solid3741873800424729.png",
+          "type": "Image"
+        },
+        {
+          "name": "briefcase-medical-solid9234366266143265.png",
+          "path": "briefcase-medical-solid9234366266143265.png",
+          "type": "Image"
+        },
+        {
+          "name": "chalkboard-user-solid05979870803273335.png",
+          "path": "chalkboard-user-solid05979870803273335.png",
+          "type": "Image"
+        },
+        {
+          "name": "chalkboard-user-solid38721271876213337.png",
+          "path": "chalkboard-user-solid38721271876213337.png",
+          "type": "Image"
+        },
+        {
+          "name": "chart-column-solid4407083086355502.png",
+          "path": "chart-column-solid4407083086355502.png",
+          "type": "Image"
+        },
+        {
+          "name": "chart-column-solid9488927552969716.png",
+          "path": "chart-column-solid9488927552969716.png",
+          "type": "Image"
+        },
+        {
+          "name": "check_(1)11156902138836167.png",
+          "path": "check_(1)11156902138836167.png",
+          "type": "Image"
+        },
+        {
+          "name": "creativity_(1)8391381510896745.png",
+          "path": "creativity_(1)8391381510896745.png",
+          "type": "Image"
+        },
+        {
+          "name": "creativity8733922027753145.png",
+          "path": "creativity8733922027753145.png",
+          "type": "Image"
+        },
+        {
+          "name": "Designer_(1)5946851795867311.png",
+          "path": "Designer_(1)5946851795867311.png",
+          "type": "Image"
+        },
+        {
+          "name": "healthcare_(1)7813963461810735.png",
+          "path": "healthcare_(1)7813963461810735.png",
+          "type": "Image"
+        },
+        {
+          "name": "lab-bg8241772992019569.png",
+          "path": "lab-bg8241772992019569.png",
+          "type": "Image"
+        },
+        {
+          "name": "novo-canva-bg20189236210638772.png",
+          "path": "novo-canva-bg20189236210638772.png",
+          "type": "Image"
+        },
+        {
+          "name": "paint_(1)569735335910643.png",
+          "path": "paint_(1)569735335910643.png",
+          "type": "Image"
+        },
+        {
+          "name": "palette-solid49787407408210616.png",
+          "path": "palette-solid49787407408210616.png",
+          "type": "Image"
+        },
+        {
+          "name": "palette-solid8693965921079678.png",
+          "path": "palette-solid8693965921079678.png",
+          "type": "Image"
+        },
+        {
+          "name": "people10519506191220507.png",
+          "path": "people10519506191220507.png",
+          "type": "Image"
+        },
+        {
+          "name": "senac9482648693002345.png",
+          "path": "senac9482648693002345.png",
+          "type": "Image"
+        },
+        {
+          "name": "surgery-room_(1)1320230998288332.png",
+          "path": "surgery-room_(1)1320230998288332.png",
+          "type": "Image"
+        },
+        {
+          "name": "teacher_(1)5132397183433584.png",
+          "path": "teacher_(1)5132397183433584.png",
+          "type": "Image"
+        },
+        {
+          "name": "teacher2846712613817932.png",
+          "path": "teacher2846712613817932.png",
+          "type": "Image"
+        },
+        {
+          "name": "trophy-solid2591636229898411.png",
+          "path": "trophy-solid2591636229898411.png",
+          "type": "Image"
+        },
+        {
+          "name": "Untitled_design_(10)8898750223418036.png",
+          "path": "Untitled_design_(10)8898750223418036.png",
+          "type": "Image"
+        },
+        {
+          "name": "Untitled_design_(11)008527974103468727.png",
+          "path": "Untitled_design_(11)008527974103468727.png",
+          "type": "Image"
+        },
+        {
+          "name": "users-solid3753420410302907.png",
+          "path": "users-solid3753420410302907.png",
+          "type": "Image"
+        },
+        {
+          "name": "users-solid9051422390820606.png",
+          "path": "users-solid9051422390820606.png",
+          "type": "Image"
+        },
+        {
+          "name": "verification_(2)6227169546956609.png",
+          "path": "verification_(2)6227169546956609.png",
+          "type": "Image"
+        },
+        {
+          "name": "view_(1)663800027697078.png",
+          "path": "view_(1)663800027697078.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

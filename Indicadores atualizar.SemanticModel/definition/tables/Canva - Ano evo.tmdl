@@ -1,0 +1,62 @@
+table 'Canva - Ano evo'
+	lineageTag: 056aa8a0-f90f-44c7-b14d-9c5a3b93d50e
+
+	column Ativados
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f5b209f-8442-4189-a913-fefc5cd6be2d
+		summarizeBy: sum
+		sourceColumn: Ativados
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Ordem
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 194cf1f3-8633-4134-aa35-698f334e8b39
+		summarizeBy: none
+		sourceColumn: Data_Ordem
+
+		variation Variation
+			isDefault
+			relationship: a2184647-3a06-401a-86f3-a1b1617cef68
+			defaultHierarchy: LocalDateTable_4cb80f4e-c79e-4da0-9afd-b6e190f030aa.'Hierarquia de datas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Mês_Formatado
+		dataType: string
+		lineageTag: 3f08fed0-c576-4692-a23f-4780a920d121
+		summarizeBy: none
+		sourceColumn: Mês_Formatado
+		sortByColumn: Data_Ordem
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Canva - Ano evo' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Canva/Percentual%20Canva.xlsx"), null, true),
+				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Tabela1_Table,{{"Mês", Int64.Type}, {"MAU", type date}, {"Ativados", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"Ativados", "Mês_Formatado"}, {"Mês", "Ativados"}, {"MAU", "Data_Ordem"}})
+				in
+				    #"Colunas Renomeadas"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

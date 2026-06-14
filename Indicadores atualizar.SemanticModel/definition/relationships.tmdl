@@ -1,0 +1,194 @@
+relationship 800fd3d2-5714-4f99-94e0-4a28a3698657
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Status contratações'.'Última atualização'
+	toColumn: LocalDateTable_3b10746a-4b1f-44fd-bb12-3cb7d36bb7bb.Date
+
+relationship AutoDetected_d1950ceb-9b1d-48e1-bcf5-b600f0833a4d
+	fromColumn: 'Edital Inova 2023'.'Departamento Regional'
+	toColumn: 'Estados - Canva'.'Departamento Regional'
+
+relationship AutoDetected_97e89d70-19fc-4c01-ac4c-5eaed6244b2c
+	fromColumn: 'Edital Inova 2024'.'Departamento Regional'
+	toColumn: 'Estados - Canva'.'Departamento Regional'
+
+relationship AutoDetected_84d6c996-6400-421a-a8f4-3980a7c3eb6c
+	fromColumn: 'Edital Melhores Práticas 2024'.'Departamento Regional'
+	toColumn: 'Estados - Canva'.'Departamento Regional'
+
+relationship AutoDetected_da61d9b8-dbe2-461a-bf1c-5ccd4d966c60
+	fromColumn: 'Edital Melhores Práticas 2025'.'Departamento Regional'
+	toColumn: 'Estados - Canva'.'Departamento Regional'
+
+relationship AutoDetected_8327e75f-ef2b-4663-80bb-89739b5947aa
+	fromColumn: 'Edital Inova 2023'.'Estado com acento'
+	toColumn: DadosAgostoCanva.'Estado com acento'
+
+relationship AutoDetected_b382b2be-1268-47ee-bf16-f30c08e9f135
+	fromColumn: 'Edital Inova 2024'.'Estado com acento'
+	toColumn: DadosAgostoCanva.'Estado com acento'
+
+relationship AutoDetected_8000395f-12a0-4c6e-8a77-569adee8f68e
+	fromColumn: 'Edital Melhores Práticas 2024'.'Estado com acento'
+	toColumn: DadosAgostoCanva.'Estado com acento'
+
+relationship AutoDetected_42eea9d8-a7ea-4d4f-bc9d-9d8f1a0f6806
+	fromColumn: 'Edital Melhores Práticas 2025'.'Estado com acento'
+	toColumn: DadosAgostoCanva.'Estado com acento'
+
+relationship AutoDetected_c7be8f77-70a5-4d8b-8a77-bba618b74e03
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Estados - Canva'.'Estado com acento'
+	toColumn: DadosAgostoCanva.'Estado com acento'
+
+relationship AutoDetected_5f832edd-758a-4103-a8fc-f2fb2108dbbc
+	fromColumn: 'Edital Inova 2023'.'Departamento Regional'
+	toColumn: 'Conclusão Docentes'.'Departamento Regional'
+
+relationship AutoDetected_0bc3317b-8269-47cb-be7b-6f5fd9aad08f
+	fromColumn: 'Edital Inova 2024'.'Departamento Regional'
+	toColumn: 'Conclusão Docentes'.'Departamento Regional'
+
+relationship AutoDetected_ae0d8176-0701-44ba-b0fa-19323d145b43
+	fromColumn: 'Edital Melhores Práticas 2024'.'Departamento Regional'
+	toColumn: 'Conclusão Docentes'.'Departamento Regional'
+
+relationship AutoDetected_a5d3e641-c680-4ef3-8e99-92d50b6a6936
+	fromColumn: 'Edital Melhores Práticas 2025'.'Departamento Regional'
+	toColumn: 'Conclusão Docentes'.'Departamento Regional'
+
+relationship AutoDetected_29aeded0-6454-4da4-acb3-39880b56a0cc
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Estados - Canva'.'Departamento Regional'
+	toColumn: 'Conclusão Docentes'.'Departamento Regional'
+
+relationship AutoDetected_4dfe6ee4-0a09-4fb8-b301-74ccd91b5efd
+	fromColumn: 'Edital Inova 2023'.'Departamento Regional'
+	toColumn: 'Conclusão Público Geral'.'Departamento Regional'
+
+relationship AutoDetected_179b7d15-d3a6-4975-8352-44ed49ce961e
+	fromColumn: 'Edital Inova 2024'.'Departamento Regional'
+	toColumn: 'Conclusão Público Geral'.'Departamento Regional'
+
+relationship AutoDetected_c6e6f30a-019b-4856-a1b7-6725bece7e54
+	fromColumn: 'Edital Melhores Práticas 2024'.'Departamento Regional'
+	toColumn: 'Conclusão Público Geral'.'Departamento Regional'
+
+relationship AutoDetected_63c3aa1a-5349-43cb-99e7-866700298b01
+	fromColumn: 'Edital Melhores Práticas 2025'.'Departamento Regional'
+	toColumn: 'Conclusão Público Geral'.'Departamento Regional'
+
+relationship AutoDetected_5cdbb56e-9603-4c9a-bd5b-4fd910eb441a
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Estados - Canva'.'Departamento Regional'
+	toColumn: 'Conclusão Público Geral'.'Departamento Regional'
+
+relationship 8c9b4dd6-59c1-4354-bc05-5204f0083853
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Crescimento do uso'.Mês
+	toColumn: LocalDateTable_bd5cc783-3a0f-4b93-8b24-369896aa3639.Date
+
+relationship 0910bdff-c10a-4b0c-995c-5f87c22effc9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Alunos vs Professores'.Mês
+	toColumn: LocalDateTable_61b51fa4-671c-4afe-a61a-a90ae142c48b.Date
+
+relationship AutoDetected_69953429-9b74-4ff9-94e3-a2f8d321f17b
+	fromColumn: LabSaude.estado_com_acento
+	toColumn: DadosAgostoCanva.'Estado com acento'
+
+relationship AutoDetected_a99f455d-aa7a-4cee-9f65-bb62e8d21229
+	fromColumn: LabSaude.estado_sem_acento
+	toColumn: 'Estados - Canva'.'Estado sem acento'
+
+relationship add5fe41-f1ff-49b2-a433-8c354d5abb1e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Consulta1.'Date accessed'
+	toColumn: LocalDateTable_b5933f81-47ef-424c-8f51-3f15f3ba17e1.Date
+
+relationship 38a3d114-2ae3-479a-9917-9536228b476e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Consulta1.'Date modified'
+	toColumn: LocalDateTable_c5b774cd-7643-4240-83d7-6188b646d637.Date
+
+relationship 3f6c1af0-2574-43f2-9022-48e764182a45
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Consulta1.'Date created'
+	toColumn: LocalDateTable_5265a821-3fe6-4dce-b49e-be943be4bcb7.Date
+
+relationship AutoDetected_7e5141a1-d1a2-452d-a3cc-66f2f3a3ed53
+	fromColumn: Saúde.Column3
+	toColumn: 'Tecnologias Educacionais'.Column3
+
+relationship dd55e920-056e-449e-a192-d2681aeb46b6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: usuarios-ativos-ed.'Última Atividade'
+	toColumn: LocalDateTable_ff355b03-8849-46f1-bd22-f316ffdc735f.Date
+
+relationship 046ff24e-8962-4a68-a34c-326c6d06508e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: usuarios-ativos-ed.'Data de Cadastro'
+	toColumn: LocalDateTable_ee11c0dd-65c4-42d7-8e82-da7d76a51e7a.Date
+
+relationship AutoDetected_485251c9-c9e0-4c8e-8d7a-b206755da28f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Usuarios-ativos-mes-Canva.Mês
+	toColumn: 'Espaço Docente - views'.Mês
+
+relationship 16812378-1002-4fbc-bd23-5bac60a7d3ae
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Usuarios-ativos-mes-Canva.Data
+	toColumn: LocalDateTable_dccf731a-50c4-4b05-a385-86f85763f792.Date
+
+relationship f6a90a6a-4370-4cc6-b564-3e4da382e257
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.Date
+	toColumn: LocalDateTable_9ce974db-e4b5-4bf9-8e99-6a05cf2712d8.Date
+
+relationship a2184647-3a06-401a-86f3-a1b1617cef68
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Canva - Ano evo'.Data_Ordem
+	toColumn: LocalDateTable_4cb80f4e-c79e-4da0-9afd-b6e190f030aa.Date
+
+relationship 78c71f89-6772-4a8f-adb0-b9fb3ab451c1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: usuarios-total-ed.Data_Ordem
+	toColumn: LocalDateTable_5e8e590e-3ba8-46b8-a87a-a45d18062705.Date
+
+relationship ed198b57-2a5b-4222-a6f4-db662931181b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendarie.Date
+	toColumn: LocalDateTable_f21cb547-83d1-434f-9f91-b833b49571fc.Date
+
+relationship 0c101450-d326-32a1-57f6-c405eb24fe3e
+	fromColumn: usuarios-total-ed.'Data de Cadastro'
+	toColumn: Calendarie.Date
+
+relationship AutoDetected_ad551857-836f-486b-82a4-8b1a955bbf19
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Tabela.Ano
+	toColumn: 'Tabela (2)'.Ano
+
+relationship AutoDetected_faab6dff-3820-493a-9f10-6cd708077a1a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: EspacoDocente-ViewAno.Ano
+	toColumn: 'Tabela (2)'.Ano
+
+relationship 35381ca8-5487-45dc-901f-f1f273cef2b8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Tabela (3)'.Data_Ordem
+	toColumn: LocalDateTable_cfaecdcd-e468-43b2-8e84-fb2a89131d2d.Date
+
+relationship c664e515-f882-4318-929b-f61473f1b527
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Espaço Docente - views'.Mês
+	toColumn: LocalDateTable_e49b7efb-98ba-4b41-9828-498735b7a249.Date
+

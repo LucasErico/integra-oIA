@@ -1,0 +1,60 @@
+table 'Tabela (3)'
+	lineageTag: 8d780885-cfe2-4808-8ddb-7c1458331da6
+
+	column Mês
+		dataType: string
+		lineageTag: fd202840-db64-4217-8e6c-e4d96bd247ed
+		summarizeBy: none
+		sourceColumn: Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column Usuários
+		dataType: double
+		formatString: 0
+		lineageTag: 41e65831-93e9-40b5-ae49-451bfae60cf0
+		summarizeBy: sum
+		sourceColumn: Usuários
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Ordem
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d1790d3c-6889-4708-b11f-4ba633c14be1
+		summarizeBy: none
+		sourceColumn: Data_Ordem
+
+		variation Variation
+			isDefault
+			relationship: 35381ca8-5487-45dc-901f-f1f273cef2b8
+			defaultHierarchy: LocalDateTable_cfaecdcd-e468-43b2-8e84-fb2a89131d2d.'Hierarquia de datas'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'Tabela (3)' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WckmtSs1NKspXSElVMDIwMlXSUTI1MjZQitWJVvJKzEvNhEuZgaSMTQ3BUm6pZalF6JJmQAok6ZtYdHg5soyZgSFEm2NSUWYOsoSxIVBLLAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Mês = _t, Usuários = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Mês", type date}, {"Usuários", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado",123,5495,Replacer.ReplaceValue,{"Usuários"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído",321,5773,Replacer.ReplaceValue,{"Usuários"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Valor Substituído1",{{"Mês", type text}}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Tipo Alterado1","01/12/2025","Dezembro de 2025",Replacer.ReplaceText,{"Mês"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2","01/01/2026","Janeiro de 2026",Replacer.ReplaceText,{"Mês"}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Valor Substituído3","01/02/2026","Fevereiro de 2026",Replacer.ReplaceText,{"Mês"}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Valor Substituído4", "Data_Ordem", each [Mês]),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"Data_Ordem", type date}}),
+				    #"Valor Substituído5" = Table.ReplaceValue(#"Tipo Alterado2",5773,5776,Replacer.ReplaceValue,{"Usuários"})
+				in
+				    #"Valor Substituído5"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

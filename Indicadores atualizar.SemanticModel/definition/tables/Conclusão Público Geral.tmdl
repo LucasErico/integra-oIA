@@ -1,0 +1,84 @@
+table 'Conclusão Público Geral'
+	lineageTag: 13430ea6-cbd3-4248-b14c-52b88b2d3d0b
+
+	column 'Departamento Regional'
+		dataType: string
+		lineageTag: 6a98bfbe-f10f-4373-9995-9fc8aabfb0a4
+		summarizeBy: none
+		sourceColumn: Departamento Regional
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estados sem acento'
+		dataType: string
+		lineageTag: e98c116f-25c8-4953-b91a-b14c68ca6ec7
+		summarizeBy: none
+		sourceColumn: Estados sem acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estados com acento'
+		dataType: string
+		lineageTag: 8a2f16be-678f-40bd-ba4f-198a24a24205
+		summarizeBy: none
+		sourceColumn: Estados com acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		dataType: string
+		lineageTag: a581b130-f880-4ad6-a74d-04e92d5c08e1
+		summarizeBy: none
+		sourceColumn: Núcleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Inscritos
+		dataType: int64
+		formatString: 0
+		lineageTag: 77cd0bb8-94b2-4e57-8a9e-f27f037cde17
+		summarizeBy: sum
+		sourceColumn: Inscritos
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Não iniciado'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ca9d9b1-bb99-49be-b89b-9d2aa916fa32
+		summarizeBy: sum
+		sourceColumn: Não iniciado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Em andamento'
+		dataType: int64
+		formatString: 0
+		lineageTag: f0c62b90-a55e-42de-b68f-7ab46f3a8320
+		summarizeBy: sum
+		sourceColumn: Em andamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Concluídos
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d3203ba-2f61-46dc-ab00-dbc542b02da9
+		summarizeBy: sum
+		sourceColumn: Concluídos
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Conclusão Público Geral' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Canva/CursoCanva.xlsx"), null, true),
+				    #"Conclusão Público Geral_Sheet" = Fonte{[Item="Conclusão Público Geral",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Conclusão Público Geral_Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Departamento Regional", type text}, {"Estados sem acento", type text}, {"Estados com acento", type text}, {"Núcleo", type text}, {"Inscritos", Int64.Type}, {"Não iniciado", Int64.Type}, {"Em andamento", Int64.Type}, {"Concluídos", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

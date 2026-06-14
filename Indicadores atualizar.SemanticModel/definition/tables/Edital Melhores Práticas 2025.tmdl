@@ -1,0 +1,88 @@
+table 'Edital Melhores Práticas 2025'
+	lineageTag: 8625c876-26df-4182-9ddd-3eed9861312f
+
+	measure 'Projetos Melhores Práticas 2025' = ```
+			
+			VAR Resultado = 
+			    CALCULATE(
+			        COUNTROWS('Todos os Projetos'),
+			        'Todos os Projetos'[Edital] = "Melhores Práticas 2025"
+			    )
+			RETURN
+			    IF(ISBLANK(Resultado), 0, Resultado)
+			```
+		formatString: 0
+		lineageTag: 3d1612a0-95b7-44b4-bf8a-b0ef65143edc
+
+	column 'Departamento Regional'
+		dataType: string
+		lineageTag: d95bebae-97b7-4054-b60f-41d32de4c467
+		summarizeBy: none
+		sourceColumn: Departamento Regional
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado sem acento'
+		dataType: string
+		lineageTag: 95a8bb1c-47d3-4d29-93f8-20002502ad05
+		summarizeBy: none
+		sourceColumn: Estado sem acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado com acento'
+		dataType: string
+		lineageTag: f92f75d3-eede-49e5-a670-6bc11e675939
+		summarizeBy: none
+		sourceColumn: Estado com acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		dataType: string
+		lineageTag: baf2b794-028b-434f-be6d-daf483993c6c
+		summarizeBy: none
+		sourceColumn: Núcleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Responsável pelo projeto'
+		dataType: string
+		lineageTag: 89518686-9b75-4381-99f6-4766ab98539a
+		summarizeBy: none
+		sourceColumn: Responsável pelo projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email do responsável pelo projeto'
+		dataType: string
+		lineageTag: 9a6f8cf5-620f-47bd-bd8d-33432d219f3c
+		summarizeBy: none
+		sourceColumn: Email do responsável pelo projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do projeto'
+		dataType: string
+		lineageTag: 7474c701-b5c2-4b10-abb5-39dfed817ead
+		summarizeBy: none
+		sourceColumn: Nome do projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Edital Melhores Práticas 2025' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Editais/EditalMelhoresPraticas2025.xlsx"), null, true),
+				    #"Edital Melhores Práticas 2025_Sheet" = Fonte{[Item="Edital Melhores Práticas 2025",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Edital Melhores Práticas 2025_Sheet",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Departamento Regional", type text}, {"Estado sem acento", type text}, {"Estado com acento", type text}, {"Núcleo", type text}, {"Responsável pelo projeto", type text}, {"Email do responsável pelo projeto", type text}, {"Nome do projeto", type text}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

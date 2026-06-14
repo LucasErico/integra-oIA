@@ -1,0 +1,96 @@
+table 'Edital Inova 2024'
+	lineageTag: eea245aa-5188-495c-b019-5133be485683
+
+	measure 'Projetos Inova 2024' = ```
+			
+			VAR Resultado = 
+			    CALCULATE(
+			        COUNTROWS('Todos os Projetos'),
+			        'Todos os Projetos'[Edital] = "Inova 2024"
+			    )
+			RETURN
+			    IF(ISBLANK(Resultado), 0, Resultado)
+			```
+		formatString: 0
+		lineageTag: 2cc0b66b-aa2a-42dd-906e-80a6155f73d5
+
+	column 'Departamento Regional'
+		dataType: string
+		lineageTag: e490c401-2d90-4af3-b962-d03b101cbb10
+		summarizeBy: none
+		sourceColumn: Departamento Regional
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado sem acento'
+		dataType: string
+		lineageTag: d7753d32-1923-4914-9616-ef2315c94390
+		summarizeBy: none
+		sourceColumn: Estado sem acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estado com acento'
+		dataType: string
+		lineageTag: 14df4cc5-92bb-4a71-8dc0-72410e26eefc
+		summarizeBy: none
+		sourceColumn: Estado com acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo
+		dataType: string
+		lineageTag: e77ea3fc-f29f-492f-b9b7-4965bc642bdb
+		summarizeBy: none
+		sourceColumn: Núcleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Responsável pelo projeto'
+		dataType: string
+		lineageTag: 3a5511d9-8231-4a76-a1de-26352053cf6f
+		summarizeBy: none
+		sourceColumn: Responsável pelo projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email do responsável pelo projeto'
+		dataType: string
+		lineageTag: 194fcbac-469c-4f07-a4b2-64998010393f
+		summarizeBy: none
+		sourceColumn: Email do responsável pelo projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do projeto'
+		dataType: string
+		lineageTag: 133ae5da-c2bb-49e1-856c-0b2b9cf5b960
+		summarizeBy: none
+		sourceColumn: Nome do projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Breve descrição do projeto'
+		dataType: string
+		lineageTag: 1fe1201a-a8ae-40d8-a05a-30a9cba0d050
+		summarizeBy: none
+		sourceColumn: Breve descrição do projeto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Edital Inova 2024' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Editais/EditalInova2024.xlsx"), null, true),
+				    #"Edital Inova 2024_Sheet" = Fonte{[Item="Edital Inova 2024",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Edital Inova 2024_Sheet",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", type text}, {"Column6", type text}, {"Column7", type text}, {"Column8", type text}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Departamento Regional", type text}, {"Estado sem acento", type text}, {"Estado com acento", type text}, {"Núcleo", type text}, {"Responsável pelo projeto", type text}, {"Email do responsável pelo projeto", type text}, {"Nome do projeto", type text}, {"Breve descrição do projeto", type text}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

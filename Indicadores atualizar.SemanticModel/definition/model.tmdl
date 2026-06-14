@@ -1,0 +1,99 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+/// Erros nas consultas que foram carregadas em 03/03/2026 10:36:11.
+queryGroup 'Erros na Consulta - 03/03/2026 10:36:11'
+
+	annotation PBI_QueryGroupOrder = 0
+
+/// Erros nas consultas que foram carregadas em 25/05/2026 11:21:45.
+queryGroup 'Erros na Consulta - 25/05/2026 11:21:45'
+
+	annotation PBI_QueryGroupOrder = 1
+
+/// Erros nas consultas que foram carregadas em 25/05/2026 14:29:06.
+queryGroup 'Erros na Consulta - 25/05/2026 14:29:06'
+
+	annotation PBI_QueryGroupOrder = 2
+
+/// Erros nas consultas que foram carregadas em 25/05/2026 15:03:11.
+queryGroup 'Erros na Consulta - 25/05/2026 15:03:11'
+
+	annotation PBI_QueryGroupOrder = 3
+
+/// Erros nas consultas que foram carregadas em 25/05/2026 15:21:22.
+queryGroup 'Erros na Consulta - 25/05/2026 15:21:22'
+
+	annotation PBI_QueryGroupOrder = 4
+
+/// Erros nas consultas que foram carregadas em 25/05/2026 15:22:39.
+queryGroup 'Erros na Consulta - 25/05/2026 15:22:39'
+
+	annotation PBI_QueryGroupOrder = 5
+
+/// Erros nas consultas que foram carregadas em 25/05/2026 15:59:39.
+queryGroup 'Erros na Consulta - 25/05/2026 15:59:39'
+
+	annotation PBI_QueryGroupOrder = 6
+
+annotation PBI_QueryOrder = ["Edital Inova 2023","Edital Inova 2024","Edital Melhores Práticas 2024","Edital Melhores Práticas 2025","Status contratações","Estados - Canva","DadosAgostoCanva","Conclusão Docentes","Conclusão Público Geral","LabSaude","Crescimento do uso","Alunos vs Professores","Consulta1","Espaço Docente - views","Tecnologias Educacionais","Saúde","Canva","Espaço Docente - usuários","usuarios-ativos-ed","usuarios-total-ed","Erros em Consulta1","KR 1 3","Usuarios-ativos-mes-Canva","Canva - Ano evo","EspacoDocente-ViewAno","Tabela (2)","Tabela (3)","Tabela","KR 1 1","Erros em Consulta1 (2)","Erros em Consulta1 (3)","Erros em Consulta1 (4)","Erros em Consulta1 (5)","Erros em Consulta1 (6)","Erros em Consulta1 (7)"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Edital Inova 2023'
+ref table 'Edital Inova 2024'
+ref table 'Edital Melhores Práticas 2024'
+ref table 'Edital Melhores Práticas 2025'
+ref table 'Status contratações'
+ref table DateTableTemplate_46be129d-17ba-46ab-ba6c-616db15f5aac
+ref table LocalDateTable_3b10746a-4b1f-44fd-bb12-3cb7d36bb7bb
+ref table 'Estados - Canva'
+ref table DadosAgostoCanva
+ref table 'Conclusão Docentes'
+ref table 'Conclusão Público Geral'
+ref table 'Todos os Projetos'
+ref table LabSaude
+ref table 'Crescimento do uso'
+ref table LocalDateTable_bd5cc783-3a0f-4b93-8b24-369896aa3639
+ref table 'Alunos vs Professores'
+ref table LocalDateTable_61b51fa4-671c-4afe-a61a-a90ae142c48b
+ref table 'Espaço Docente - views'
+ref table Consulta1
+ref table LocalDateTable_b5933f81-47ef-424c-8f51-3f15f3ba17e1
+ref table LocalDateTable_c5b774cd-7643-4240-83d7-6188b646d637
+ref table LocalDateTable_5265a821-3fe6-4dce-b49e-be943be4bcb7
+ref table 'Tecnologias Educacionais'
+ref table Saúde
+ref table Canva
+ref table 'Espaço Docente - usuários'
+ref table usuarios-ativos-ed
+ref table LocalDateTable_ff355b03-8849-46f1-bd22-f316ffdc735f
+ref table LocalDateTable_ee11c0dd-65c4-42d7-8e82-da7d76a51e7a
+ref table usuarios-total-ed
+ref table 'KR 1 3'
+ref table Usuarios-ativos-mes-Canva
+ref table LocalDateTable_dccf731a-50c4-4b05-a385-86f85763f792
+ref table Calendario
+ref table LocalDateTable_9ce974db-e4b5-4bf9-8e99-6a05cf2712d8
+ref table 'Canva - Ano evo'
+ref table LocalDateTable_4cb80f4e-c79e-4da0-9afd-b6e190f030aa
+ref table LocalDateTable_5e8e590e-3ba8-46b8-a87a-a45d18062705
+ref table Calendarie
+ref table LocalDateTable_f21cb547-83d1-434f-9f91-b833b49571fc
+ref table Tabela
+ref table EspacoDocente-ViewAno
+ref table 'Tabela (2)'
+ref table 'Tabela (3)'
+ref table LocalDateTable_cfaecdcd-e468-43b2-8e84-fb2a89131d2d
+ref table LocalDateTable_e49b7efb-98ba-4b41-9828-498735b7a249
+ref table 'KR 1 1'
+
+ref cultureInfo pt-BR
+

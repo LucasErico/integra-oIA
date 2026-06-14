@@ -1,0 +1,246 @@
+table LabSaude
+	lineageTag: 71d41811-588d-4f45-9c73-fa685af5013b
+
+	measure 'Estados com Lab Saúde' =
+			
+			DISTINCTCOUNT('LabSaude'[estado com acento])
+		formatString: 0
+		lineageTag: c96af35a-b974-4170-8a09-4aecf1db76fe
+
+	measure 'Total de Unidades' =
+			
+			DISTINCTCOUNT('LabSaude'[codigo_unidade])
+		formatString: 0
+		lineageTag: 0205f4e6-f208-4050-9339-377f5988f9d1
+
+	measure 'Lista Unidades Tooltip' =
+			
+			VAR Separador = UNICHAR(10) // quebra de linha
+			RETURN
+			CONCATENATEX(
+			    'LabSaude',
+			    "• " & 'LabSaude'[codigo_unidade] & " - " & 'LabSaude'[unidade],
+			    Separador,
+			    'LabSaude'[unidade],
+			    ASC
+			)
+		lineageTag: 9503d067-bbca-40c0-9c4b-b61e1380d033
+
+	measure 'Contagem Sim Lab' = ```
+			
+			CALCULATE(
+			    COUNTROWS('LabSaude'), 
+			    'LabSaude'[tem laboratorio de simulacao realística?] = "sim"
+			)
+			```
+		formatString: 0
+		lineageTag: 7cd75a12-2f93-400f-83fb-f2935187025b
+
+	column id
+		dataType: string
+		lineageTag: 28b94f3d-1f3c-4975-8bca-c428cbae497f
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf
+		dataType: string
+		lineageTag: d4bc4a8c-3bae-430c-af9c-10c981f1d2de
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column unidade
+		dataType: string
+		lineageTag: 25b01e33-44fc-4885-b02f-c2df728b9949
+		summarizeBy: none
+		sourceColumn: unidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_unidade
+		dataType: string
+		lineageTag: 402d1bdc-36b5-4ed5-a262-28702d6cd011
+		summarizeBy: none
+		sourceColumn: codigo_unidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column endereco
+		dataType: string
+		lineageTag: 107e086c-4f35-4694-ba3d-81edaa861b00
+		summarizeBy: none
+		sourceColumn: endereco
+
+		annotation SummarizationSetBy = Automatic
+
+	column cidade
+		dataType: string
+		lineageTag: 83e0e075-8160-420f-ab61-8f1a20a19c2d
+		summarizeBy: none
+		sourceColumn: cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column cep
+		dataType: string
+		lineageTag: a7c6dd90-08ce-4404-8bb1-b528caa187e2
+		summarizeBy: none
+		sourceColumn: cep
+
+		annotation SummarizationSetBy = Automatic
+
+	column endereco_completo
+		dataType: string
+		lineageTag: adafa7e2-d9f3-412a-9dbf-cf088ca984b9
+		summarizeBy: none
+		sourceColumn: endereco_completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: string
+		lineageTag: 5c513d63-f5ab-4ba5-9dac-2597899d333e
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column longitude
+		dataType: string
+		lineageTag: 1af82625-088f-45b8-8e8c-411f4a25e179
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column descricao
+		dataType: string
+		lineageTag: 567e9bca-690f-4116-89b1-1656131497a1
+		summarizeBy: none
+		sourceColumn: descricao
+
+		annotation SummarizationSetBy = Automatic
+
+	column Núcleo =
+			
+			SWITCH(
+			    'LabSaude'[uf],
+			    "AC", "Norte/Centro-oeste",
+			    "AM", "Norte/Centro-oeste",
+			    "AP", "Norte/Centro-oeste",
+			    "PA", "Norte/Centro-oeste",
+			    "RO", "Norte/Centro-oeste",
+			    "RR", "Norte/Centro-oeste",
+			    "TO", "Norte/Centro-oeste",
+			    "DF", "Norte/Centro-oeste",
+			    "GO", "Norte/Centro-oeste",
+			    "MS", "Norte/Centro-oeste",
+			    "MT", "Norte/Centro-oeste",
+			    "AL", "Nordeste",
+			    "BA", "Nordeste",
+			    "CE", "Nordeste",
+			    "MA", "Nordeste",
+			    "PB", "Nordeste",
+			    "PE", "Nordeste",
+			    "PI", "Nordeste",
+			    "RN", "Nordeste",
+			    "SE", "Nordeste",
+			    "ES", "Sul/Sudeste",
+			    "MG", "Sul/Sudeste",
+			    "RJ", "Sul/Sudeste",
+			    "SP", "Sul/Sudeste",
+			    "PR", "Sul/Sudeste",
+			    "RS", "Sul/Sudeste",
+			    "SC", "Sul/Sudeste",
+			    "Não identificado"
+			)
+		lineageTag: cec7ac4b-b3f9-4aea-82de-5da69b740606
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado_sem_acento
+		dataType: string
+		lineageTag: d24a0130-b76c-4885-9da4-a444ffe30b4f
+		summarizeBy: none
+		sourceColumn: estado_sem_acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado_com_acento
+		dataType: string
+		lineageTag: a55f8c5d-d259-4724-b459-493e8d6bbb06
+		summarizeBy: none
+		sourceColumn: estado_com_acento
+
+		annotation SummarizationSetBy = Automatic
+
+	column nucleo
+		dataType: string
+		lineageTag: 705e6ff9-1196-49a4-bba7-842a906b2d13
+		summarizeBy: none
+		sourceColumn: nucleo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'tem laboratorio de simulacao realística?'
+		dataType: string
+		lineageTag: 3b788655-4a97-4e0e-8a53-1fffc3c6f573
+		summarizeBy: none
+		sourceColumn: tem laboratorio de simulacao realística?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'imagens lab (se houver)'
+		dataType: string
+		lineageTag: b4cf6cb0-6abf-4be0-9182-d7ece28d6d09
+		summarizeBy: none
+		sourceColumn: imagens lab (se houver)
+
+		annotation SummarizationSetBy = Automatic
+
+	column dados_mtr_tecenf_2024
+		dataType: int64
+		formatString: 0
+		lineageTag: e77d8cee-9fa7-4d0e-b105-c91d484296fb
+		summarizeBy: sum
+		sourceColumn: dados_mtr_tecenf_2024
+
+		annotation SummarizationSetBy = Automatic
+
+	column dados_mtr_tecenf_2025
+		dataType: int64
+		formatString: 0
+		lineageTag: c3087144-ee03-48f2-a6ff-21bbf6c09b2e
+		summarizeBy: sum
+		sourceColumn: dados_mtr_tecenf_2025
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'subsidiado pelo dn?'
+		dataType: string
+		lineageTag: f49105b0-d66e-4ba8-bac0-a407c84c3297
+		summarizeBy: none
+		sourceColumn: subsidiado pelo dn?
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LabSaude = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Laborat%C3%B3rios/laboratorios.xlsx"), null, true),
+				    Tabela1_Table = Fonte{[Item="Tabela1",Kind="Table"]}[Data],
+				    #"Valor Substituído" = Table.ReplaceValue(Tabela1_Table,447,447,Replacer.ReplaceValue,{"dados_mtr_tecenf_2024"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído",401,401,Replacer.ReplaceValue,{"dados_mtr_tecenf_2025"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Valor Substituído1",{{"dados_mtr_tecenf_2024", Int64.Type}, {"dados_mtr_tecenf_2025", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

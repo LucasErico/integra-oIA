@@ -1,0 +1,137 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "7a8fa176991d9e5e4b57",
+  "position": {
+    "x": 33.069908814589667,
+    "y": 241.21580547112464,
+    "z": 1000,
+    "height": 176.048632218845,
+    "width": 563.161094224924,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Canva"
+                    }
+                  },
+                  "Property": "Column5"
+                }
+              },
+              "queryRef": "Canva.Column5",
+              "nativeQueryRef": "Departamento Regional",
+              "displayName": "Departamento Regional"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Canva"
+                    }
+                  },
+                  "Property": "Column1"
+                }
+              },
+              "queryRef": "Canva.Column1",
+              "nativeQueryRef": "Contato Técnico",
+              "displayName": "Contato Técnico"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Canva"
+                    }
+                  },
+                  "Property": "Column2"
+                }
+              },
+              "queryRef": "Canva.Column2",
+              "nativeQueryRef": "Contato Pedagógico",
+              "displayName": "Contato Pedagógico"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Canva"
+                  }
+                },
+                "Property": "Column5"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "226.62631678476788D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Canva.Column1"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "172.445841883922D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Canva.Column2"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "138.82199759608267D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Canva.Column5"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

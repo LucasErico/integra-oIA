@@ -1,0 +1,37 @@
+table 'Tabela (2)'
+	lineageTag: f0532e53-2c2e-4545-a78f-03a567189e3a
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 73072ee7-9214-4c5f-a272-3bda5e371a0a
+		summarizeBy: none
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Usuários
+		dataType: double
+		formatString: 0
+		lineageTag: 738cb983-8104-4c3f-8986-f5b7093e5c62
+		summarizeBy: sum
+		sourceColumn: Usuários
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tabela (2)' = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMjIwMlHSUTK2tDRRitUB802BfFNjc2MY3wzINzM2NFOKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Ano = _t, Usuários = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Ano", Int64.Type}, {"Usuários", Int64.Type}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado",5812,5772,Replacer.ReplaceValue,{"Usuários"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído",5772,5776,Replacer.ReplaceValue,{"Usuários"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1",5776,5977,Replacer.ReplaceValue,{"Usuários"})
+				in
+				    #"Valor Substituído2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

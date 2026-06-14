@@ -1,0 +1,129 @@
+table 'Espaço Docente - usuários'
+	lineageTag: 589cd603-3522-4191-92bf-3496f2433802
+
+	column 'Tempo de submissão'
+		dataType: string
+		lineageTag: 038d46b8-8945-4d4a-a5e6-31983487e6e5
+		summarizeBy: none
+		sourceColumn: Tempo de submissão
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome e sobrenome'
+		dataType: string
+		lineageTag: 4bc821de-06e5-45c7-adb4-1c3191601870
+		summarizeBy: none
+		sourceColumn: Nome e sobrenome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'E-mail Institucional'
+		dataType: string
+		lineageTag: 8a2f04b5-8b64-4889-98fc-4a3e4e710f52
+		summarizeBy: none
+		sourceColumn: E-mail Institucional
+
+		annotation SummarizationSetBy = Automatic
+
+	column Senha
+		dataType: string
+		lineageTag: acec7289-fe1a-4a1f-9ef0-e8f8917afa94
+		summarizeBy: none
+		sourceColumn: Senha
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data de nacimento'
+		dataType: string
+		lineageTag: 54f498e6-0065-4368-a07b-6b83fd0f504f
+		summarizeBy: none
+		sourceColumn: Data de nacimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Qual a unidade em que trabalha?'
+		dataType: string
+		lineageTag: 349efebf-e8a8-47de-a2da-949e4b7f298c
+		summarizeBy: none
+		sourceColumn: Qual a unidade em que trabalha?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano de entrada no Senac'
+		dataType: string
+		lineageTag: bfca6cef-03df-434f-9516-436187529a9f
+		summarizeBy: none
+		sourceColumn: Ano de entrada no Senac
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grau de escolaridade'
+		dataType: string
+		lineageTag: 3b5745f3-a1f2-4e1b-8952-8139ad372497
+		summarizeBy: none
+		sourceColumn: Grau de escolaridade
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Você é'
+		dataType: string
+		lineageTag: 85608e60-078e-4c4c-b624-ccbe9087ebd4
+		summarizeBy: none
+		sourceColumn: Você é
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Eixo em que atua'
+		dataType: string
+		lineageTag: 8e029742-f91f-47c1-b415-5e6ab4d7694c
+		summarizeBy: none
+		sourceColumn: Eixo em que atua
+
+		annotation SummarizationSetBy = Automatic
+
+	column Consent
+		dataType: string
+		lineageTag: 14ee965b-5014-4351-95f1-e175f3875156
+		summarizeBy: none
+		sourceColumn: Consent
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Possui alguma especialização pedagógica?'
+		dataType: string
+		lineageTag: 939a1bb1-207c-4195-a00e-39496a91cdd4
+		summarizeBy: none
+		sourceColumn: Possui alguma especialização pedagógica?
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qual(is)?
+		dataType: string
+		lineageTag: 95649060-dd5c-49e4-858b-21f43dd0ff57
+		summarizeBy: none
+		sourceColumn: Qual(is)?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Selecione seu DR'
+		dataType: string
+		lineageTag: c3777e5e-2bd8-40ad-b7e0-5ac324ef2197
+		summarizeBy: none
+		sourceColumn: Selecione seu DR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Espaço Docente - usuários' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Espa%C3%A7o%20Docente/espaco-docente.xlsx"), null, true),
+				    #"forminator-registro-do-usuario-_Sheet" = Fonte{[Item="forminator-registro-do-usuario-",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"forminator-registro-do-usuario-_Sheet", [PromoteAllScalars=true])
+				in
+				    #"Cabeçalhos Promovidos"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

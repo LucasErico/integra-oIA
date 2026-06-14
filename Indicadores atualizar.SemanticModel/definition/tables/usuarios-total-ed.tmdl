@@ -1,0 +1,170 @@
+table usuarios-total-ed
+	lineageTag: b7bb6bcc-b22b-425b-9eb4-2d4b95c8d36f
+
+	measure TotalCadastrado = COUNTROWS('usuarios-total-ed')
+		formatString: 0
+		lineageTag: ed954638-e2d9-46ae-9b77-7a6db238d911
+
+	measure 'Percentual de Ativação' = ```
+			
+			DIVIDE(
+			    [TotalAtivos], 
+			    [TotalCadastrado], 
+			    0
+			)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e096aed8-8187-44c2-af46-3aade60a37be
+
+	measure 'Total Usuarios' = COUNT('usuarios-total-ed'[ID])
+		formatString: 0
+		lineageTag: b0de24e5-d03c-4bc4-a204-d14671d765ff
+
+	measure 'Usuarios Mes Anterior' = ```
+			
+			CALCULATE(
+			    [Total Usuarios], 
+			    DATEADD('Calendario'[Date], -1, MONTH)
+			)
+			```
+		formatString: 0
+		lineageTag: da269402-8a81-4aa1-b8b7-0b1e82ede186
+
+	measure '% Crescimento MoM' = ```
+			
+			DIVIDE(
+			    [Total Usuarios] - [Usuarios Mes Anterior], 
+			    [Usuarios Mes Anterior], 
+			    0
+			)
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 4e8ee8df-a544-4dcf-ad3b-974e9d428958
+
+	measure 'Usuarios Ano Anterior' = ```
+			
+			CALCULATE(
+			    [Total Usuarios], 
+			    SAMEPERIODLASTYEAR('Calendario'[Date])
+			)
+			```
+		formatString: 0
+		lineageTag: 87492a9c-d7c7-42af-a547-0ca44fd310e0
+
+	measure '% Crescimento YoY' = ```
+			
+			DIVIDE(
+			    [Total Usuarios] - [Usuarios Ano Anterior], 
+			    [Usuarios Ano Anterior], 
+			    0
+			)
+			```
+		lineageTag: 5ecb529c-5655-4b3c-a3fc-35711cba1a8d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 0df1166d-cf15-40d6-af9b-016fa2ad0dd1
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome
+		dataType: string
+		lineageTag: 702cbdfd-e71a-4b7e-9a0d-aa969295a4dc
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: e9aa5d3d-8bcf-48ae-8ede-f7b7b2c76ce8
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado
+		dataType: string
+		lineageTag: 9a5d32e6-e07c-4763-bc57-e59dee75cb7e
+		summarizeBy: none
+		sourceColumn: Estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Última Atividade'
+		dataType: string
+		lineageTag: b5d594fd-3227-4974-b39d-ce7732a05321
+		summarizeBy: none
+		sourceColumn: Última Atividade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Papel
+		dataType: string
+		lineageTag: 0724ed70-d4b9-4ebf-abc6-5970cccb8b1c
+		summarizeBy: none
+		sourceColumn: Papel
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data de Cadastro'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 107c13d9-0a9f-4774-8e37-961a27e3dccc
+		summarizeBy: none
+		sourceColumn: Data de Cadastro
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Data_Ordem
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dd22940f-e5a0-4637-aa14-f1fa9f3db100
+		summarizeBy: none
+		sourceColumn: Data_Ordem
+
+		variation Variation
+			isDefault
+			relationship: 78c71f89-6772-4a8f-adb0-b9fb3ab451c1
+			defaultHierarchy: LocalDateTable_5e8e590e-3ba8-46b8-a87a-a45d18062705.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Mês_Formatado
+		dataType: string
+		lineageTag: 5e9a12aa-a3c6-4dfb-8172-0d23e34c01ab
+		summarizeBy: none
+		sourceColumn: Mês_Formatado
+		sortByColumn: Data_Ordem
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition usuarios-total-ed = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://senacnacional.sharepoint.com/sites/mapeamento-tecnologias/Documentos%20Compartilhados/Espa%C3%A7o%20Docente/usuarios-total-ed.xlsx"), null, true),
+				    usuarios_todos__3_Table = Fonte{[Item="usuarios_todos__3",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(usuarios_todos__3_Table,{{"ID", Int64.Type}, {"Nome", type text}, {"Email", type text}, {"Estado", type text}, {"Última Atividade", type text}, {"Papel", type text}, {"Data de Cadastro", type date}}),
+				    #"Início do Mês Inserido" = Table.AddColumn(#"Tipo Alterado", "Início do Mês", each Date.StartOfMonth([Data de Cadastro]), type date),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Início do Mês Inserido",{{"Início do Mês", "Data_Ordem"}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Colunas Renomeadas", "Personalizar", each Date.ToText([Data de Cadastro], "MMMM yyyy")),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Personalização Adicionada",{{"Personalizar", "Mês_Formatado"}})
+				in
+				    #"Colunas Renomeadas1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+
